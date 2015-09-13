@@ -1,0 +1,8 @@
+units_wars
+{
+	material materials/overviews/units_wars.vmat
+	pos_x -8192
+	pos_y 8192
+	scale 16.000
+}
+
