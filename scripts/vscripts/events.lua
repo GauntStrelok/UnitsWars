@@ -227,6 +227,11 @@ function GameMode:OnPlayerPickHero(keys)
 
   Timers:CreateTimer(function() building:SetAbsOrigin(position) end)
 
+   gameTeams[playerTeam]["hero"] = hero
+   gameTeams[playerTeam]["playerID"] = playerID
+   gameTeams[playerTeam]["position"] = position
+
+  
   if playerTeam == 2 then
 
     hero0 = hero
@@ -354,6 +359,11 @@ function GameMode:OnEntityKilled( keys )
   -- aca vamos a poner el codigo feo xD
 
   local team = killedUnit:GetTeamNumber()
+--TODO esto lo dejo asi por ahora, pero creo que lo optimo seria transformar la logica de aca, y pedir que la unidad matada no pertenezca a la lista de unidades mercenarias(o, que sea igual a la lista de unidades de spawn)
+
+	checkIfValueInArray(killedUnit, tableKills) then
+		gameTeams[team]["cantidad"] = gameTeams[team]["cantidad"] -1
+	end
 
   if team == 2 and killedUnit ~= hero0 then 
     cantidad0 = cantidad0-1
@@ -493,4 +503,16 @@ function getUnitFromTableKills(teamNumber, kills)
     return newUnit
   end
   return false
+end
+
+function checkIfValueInArray(value, array)
+
+	for _,v in pairs(items) do
+	  if v == "orange" then
+		return true
+		break
+	  end
+	end
+	return false
+
 end
