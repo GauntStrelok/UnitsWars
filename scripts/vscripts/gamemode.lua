@@ -116,17 +116,7 @@ function GameMode:OnGameInProgress()
       
 tableKills = {"npc_dota_neutral_kobold_tunneler","npc_dota_neutral_kobold_taskmaster","npc_dota_neutral_centaur_outrunner","npc_dota_neutral_centaur_khan","npc_dota_neutral_dark_troll_warlord","npc_dota_neutral_dark_troll_warlord","npc_dota_neutral_dark_troll_warlord","npc_dota_neutral_dark_troll_warlord","npc_dota_neutral_dark_troll_warlord","npc_dota_neutral_dark_troll_warlord","npc_dota_neutral_dark_troll_warlord","npc_dota_neutral_dark_troll_warlord","npc_dota_neutral_dark_troll_warlord","npc_dota_neutral_dark_troll_warlord","npc_dota_neutral_dark_troll_warlord"}
   
-  gameTeams = {}
-  gameTeams[2] = {kills=0, unitSpawn="npc_dota_neutral_kobold"}
-  gameTeams[3] = {kills=0, unitSpawn="npc_dota_neutral_kobold"}
-  gameTeams[6] = {kills=0, unitSpawn="npc_dota_neutral_kobold"}
-  gameTeams[7] = {kills=0, unitSpawn="npc_dota_neutral_kobold"}
-  gameTeams[8] = {kills=0, unitSpawn="npc_dota_neutral_kobold"}
-  gameTeams[9] = {kills=0, unitSpawn="npc_dota_neutral_kobold"}
-  gameTeams[10] = {kills=0, unitSpawn="npc_dota_neutral_kobold"}
-  gameTeams[11] = {kills=0, unitSpawn="npc_dota_neutral_kobold"}
-  gameTeams[12] = {kills=0, unitSpawn="npc_dota_neutral_kobold"}
-  gameTeams[13] = {kills=0, unitSpawn="npc_dota_neutral_kobold"}
+  
 
   maxUnitsPerTeam = 20;
   unitsSpawnTime = 1;
@@ -154,10 +144,14 @@ tableKills = {"npc_dota_neutral_kobold_tunneler","npc_dota_neutral_kobold_taskma
         cantidad0 = cantidad0+1
       end
 ]]
+
+-- TODO for each gameteams, me fijo que onda la cantidad de unidades y con eso cambio los valores requeridos para evitar que quede en una estructura de ifs seguidos.
+
+
       if hero0 and cantidad0 < maxUnitsPerTeam then
 
         createUnitForPlayerInBase(hero0,position0,"waypoint0",gameTeams[2]["unitSpawn"],playerID0)
-
+		gameTeams[2]["cantidad"] = gameTeams[2]["cantidad"]+1
         cantidad0 = cantidad0+1
       end
 
@@ -236,6 +230,19 @@ end
 -- This function initializes the game mode and is called before anyone loads into the game
 -- It can be used to pre-initialize any values/tables that will be needed later
 function GameMode:InitGameMode()
+
+  gameTeams = {}
+  gameTeams[2] = {kills=0, unitSpawn="npc_dota_neutral_kobold", cantidad=0}
+  gameTeams[3] = {kills=0, unitSpawn="npc_dota_neutral_kobold", cantidad=0}
+  gameTeams[6] = {kills=0, unitSpawn="npc_dota_neutral_kobold", cantidad=0}
+  gameTeams[7] = {kills=0, unitSpawn="npc_dota_neutral_kobold", cantidad=0}
+  gameTeams[8] = {kills=0, unitSpawn="npc_dota_neutral_kobold", cantidad=0}
+  gameTeams[9] = {kills=0, unitSpawn="npc_dota_neutral_kobold", cantidad=0}
+  gameTeams[10] = {kills=0, unitSpawn="npc_dota_neutral_kobold", cantidad=0}
+  gameTeams[11] = {kills=0, unitSpawn="npc_dota_neutral_kobold", cantidad=0}
+  gameTeams[12] = {kills=0, unitSpawn="npc_dota_neutral_kobold", cantidad=0}
+  gameTeams[13] = {kills=0, unitSpawn="npc_dota_neutral_kobold", cantidad=0}
+
   GameMode = self
   DebugPrint('[BAREBONES] Starting to load Barebones gamemode...')
 
@@ -285,3 +292,4 @@ function createUnitForPlayerInBase(heroOwner,positionOwner,waypointName,unitName
 
 
 end
+
